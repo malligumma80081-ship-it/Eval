@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "question": "What is Python?",
+        "expected_answer": "Python is a high-level programming language.",
+        "actual_answer": "",
+        "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        }
+    },
+    {
+        "id": 2,
+        "question": "What is machine learning?",
+        "expected_answer": "Machine learning is a method where computers learn patterns from data.",
+        "actual_answer": "",
+        "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        }
+    },
+    {
+        "id": 3,
+        "question": "What is artificial intelligence?",
+        "expected_answer": "Artificial intelligence is the field of creating systems that can perform tasks requiring human-like intelligence.",
+        "actual_answer": "",
+        "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        }
+    },
+    {
+        "id": 4,
+        "question": "What is an LLM?",
+        "expected_answer": "An LLM is a large language model trained to understand and generate human language.",
+        "actual_answer": "",
+        "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        }
+    },
+    {
+        "id": 5,
+        "question": "What is RAG?",
+        "expected_answer": "RAG is a technique that retrieves relevant information and provides it to a language model to generate an answer.",
+        "actual_answer": "",
+        "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        }
+    }
+]
