@@ -147,9 +147,11 @@
 
 import json
 from pathlib import Path
+from re import match
 
 from app.llm.ollama_client import OllamaClient
 from app.evaluation.evaluator import Evaluator
+from app.evaluation.metrics import exact_match
 
 
 results_dir = Path("results")
@@ -218,12 +220,13 @@ for test_case in dataset:
 
     # Create result
     result = {
-        "id": test_case["id"],
-        "question": question,
-        "expected_answer": expected_answer,
-        "actual_answer": actual_answer,
-        "evaluation": evaluation
-    }
+    "id": test_case["id"],
+    "question": question,
+    "expected_answer": expected_answer,
+    "actual_answer": actual_answer,
+    "exact_match": exact_match(actual_answer, expected_answer),
+    "evaluation": evaluation
+}
 
     results.append(result)
 
@@ -240,6 +243,9 @@ for test_case in dataset:
 
     print("\nEVALUATION:")
     print(evaluation)
+
+    print("\nEXACT MATCH:")
+    print(exact_match(actual_answer, expected_answer))
 
 
 # --------------------------------

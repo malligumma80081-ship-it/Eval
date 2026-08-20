@@ -4,6 +4,7 @@
         "question": "What is Python?",
         "expected_answer": "Python is a high-level programming language.",
         "actual_answer": "",
+        "exact_match": false,
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
@@ -14,6 +15,7 @@
         "question": "What is machine learning?",
         "expected_answer": "Machine learning is a method where computers learn patterns from data.",
         "actual_answer": "",
+        "exact_match": false,
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
@@ -24,6 +26,7 @@
         "question": "What is artificial intelligence?",
         "expected_answer": "Artificial intelligence is the field of creating systems that can perform tasks requiring human-like intelligence.",
         "actual_answer": "",
+        "exact_match": false,
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
@@ -34,6 +37,7 @@
         "question": "What is an LLM?",
         "expected_answer": "An LLM is a large language model trained to understand and generate human language.",
         "actual_answer": "",
+        "exact_match": false,
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
@@ -44,6 +48,7 @@
         "question": "What is RAG?",
         "expected_answer": "RAG is a technique that retrieves relevant information and provides it to a language model to generate an answer.",
         "actual_answer": "",
+        "exact_match": false,
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
