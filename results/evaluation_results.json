@@ -8,6 +8,10 @@
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        },
+        "semantic_evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
         }
     },
     {
@@ -17,6 +21,10 @@
         "actual_answer": "",
         "exact_match": false,
         "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        },
+        "semantic_evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
         }
@@ -30,6 +38,10 @@
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        },
+        "semantic_evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
         }
     },
     {
@@ -41,6 +53,10 @@
         "evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        },
+        "semantic_evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
         }
     },
     {
@@ -50,6 +66,10 @@
         "actual_answer": "",
         "exact_match": false,
         "evaluation": {
+            "score": null,
+            "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
+        },
+        "semantic_evaluation": {
             "score": null,
             "reason": "Error: Ollama is not available or not running. Start the Ollama service and try again."
         }

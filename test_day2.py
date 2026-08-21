@@ -152,6 +152,7 @@ from re import match
 from app.llm.ollama_client import OllamaClient
 from app.evaluation.evaluator import Evaluator
 from app.evaluation.metrics import exact_match
+from app.evaluation.semantic import SemanticEvaluator
 
 
 results_dir = Path("results")
@@ -178,6 +179,7 @@ with open(
 llm = OllamaClient(timeout=5)
 
 evaluator = Evaluator(llm=llm)
+semantic_evaluator = SemanticEvaluator()
 
 
 # --------------------------------
@@ -196,10 +198,7 @@ for test_case in dataset:
     question = test_case["question"]
     expected_answer = test_case["expected_answer"]
     actual_answer = ""
-    evaluation = {
-        "score": None,
-        "reason": "Evaluation skipped because the Ollama service is unavailable."
-    }
+    semantic_evaluation = None
 
     # Generate answer
     try:
@@ -211,8 +210,27 @@ for test_case in dataset:
             expected_answer=expected_answer,
             actual_answer=actual_answer
         )
+
+        # Evaluate semantically
+        semantic_evaluation = semantic_evaluator.evaluate(
+            expected=expected_answer,
+            actual=actual_answer
+        )
     except Exception as exc:
         evaluation = {
+            "score": None,
+            "reason": f"Error: {exc}"
+        }
+        semantic_evaluation = {
+            "score": None,
+            "reason": f"Error: {exc}"
+        }
+    except Exception as exc:
+        evaluation = {
+            "score": None,
+            "reason": f"Error: {exc}"
+        }
+        semantic_evaluation = {
             "score": None,
             "reason": f"Error: {exc}"
         }
@@ -225,7 +243,8 @@ for test_case in dataset:
     "expected_answer": expected_answer,
     "actual_answer": actual_answer,
     "exact_match": exact_match(actual_answer, expected_answer),
-    "evaluation": evaluation
+    "evaluation": evaluation,
+    "semantic_evaluation": semantic_evaluation  
 }
 
     results.append(result)

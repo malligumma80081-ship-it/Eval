@@ -1,0 +1,6 @@
+cd C:\Users\user\Desktop\EVAL\EVAL ( path directory to the file's )
+git status (to check the status of files )
+git remote -v (to check repository name )
+git add .( . is add all files ) or git add day-3 (add only one file )
+git commit -m "any changes you can name it "
+git push origin main (push the file in git repository)
