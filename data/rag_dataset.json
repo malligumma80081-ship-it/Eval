@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "question": "Who created Python?",
+        "context": [
+            "Python was created by Guido van Rossum.",
+            "Python is a high-level programming language.",
+            "Python is widely used in data science and machine learning."
+        ],
+        "reference_answer": "Python was created by Guido van Rossum."
+    },
+    {
+        "id": 2,
+        "question": "What is machine learning?",
+        "context": [
+            "Machine learning is a branch of artificial intelligence.",
+            "It allows systems to learn patterns from data.",
+            "Python is commonly used for machine learning."
+        ],
+        "reference_answer": "Machine learning is a branch of artificial intelligence that allows systems to learn patterns from data."
+    }
+]

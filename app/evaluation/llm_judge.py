@@ -10,7 +10,6 @@ class LLMJudge:
     ):
         self.model = model
 
-
     def build_prompt(
         self,
         question,
@@ -65,25 +64,24 @@ Required JSON format:
         return prompt
 
     def calculate_overall(
-            self,
-            result
-        ):
-    
-            correctness = result["correctness"]
-            relevance = result["relevance"]
-            completeness = result["completeness"]
-    
-            overall = (
-                correctness
-                + relevance
-                + completeness
-            ) / 3
-    
-            return round(
-                overall,
-                2
-            )
-            
+        self,
+        result
+    ):
+
+        correctness = result["correctness"]
+        relevance = result["relevance"]
+        completeness = result["completeness"]
+
+        overall = (
+            correctness
+            + relevance
+            + completeness
+        ) / 3
+
+        return round(
+            overall,
+            2
+        )
 
     def judge(
         self,
@@ -117,11 +115,31 @@ Required JSON format:
         if "error" not in result:
 
             result["calculated_overall"] = (
-            self.calculate_overall(result)
+                self.calculate_overall(result)
             )
 
         return result
 
+    def evaluate_prompt(
+        self,
+        prompt
+    ):
+
+        response = ollama.chat(
+            model=self.model,
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        content = response["message"]["content"]
+
+        return self.parse_response(
+            content
+        )
 
     def parse_response(
         self,
@@ -142,4 +160,4 @@ Required JSON format:
                 "error": "Judge did not return valid JSON",
                 "raw_response": response
             }
-        
+    
