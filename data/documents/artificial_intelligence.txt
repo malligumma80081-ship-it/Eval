@@ -1,0 +1,7 @@
+Artificial intelligence is the field of building
+systems that can perform tasks that normally require
+human intelligence.
+
+AI includes areas such as machine learning,
+natural language processing, computer vision,
+robotics, and generative AI.
