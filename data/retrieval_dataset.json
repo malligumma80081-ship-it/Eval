@@ -1,0 +1,20 @@
+[
+    {
+        "question": "Who created Python?",
+        "relevant_sources": [
+            "python.txt"
+        ]
+    },
+    {
+        "question": "What is machine learning?",
+        "relevant_sources": [
+            "machine_learning.txt"
+        ]
+    },
+    {
+        "question": "What is artificial intelligence?",
+        "relevant_sources": [
+            "artificial_intelligence.txt"
+        ]
+    }
+]
