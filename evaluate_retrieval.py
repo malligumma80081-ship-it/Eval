@@ -39,7 +39,7 @@ def main():
 
         retrieved = retriever.retrieve(
             question,
-            top_k=3
+            top_k=10
         )
 
         retrieved_sources = [

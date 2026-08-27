@@ -22,7 +22,7 @@ class VectorStore:
     def search(
         self,
         query_embedding,
-        top_k=3
+        top_k=10
     ):
 
         distances, indices = (

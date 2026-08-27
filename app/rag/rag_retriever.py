@@ -69,7 +69,7 @@ class RAGRetriever:
     def retrieve(
         self,
         question: str,
-        top_k: int = 3
+        top_k: int = 10
     ):
 
         query_embedding = create_embeddings(

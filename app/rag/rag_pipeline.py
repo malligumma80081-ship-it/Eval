@@ -65,7 +65,7 @@ class RAGPipeline:
     def retrieve(
         self,
         question,
-        top_k=2
+        top_k=10
     ):
 
         query_embedding = create_embeddings(
@@ -137,7 +137,7 @@ Answer:
     def ask(
         self,
         question,
-        top_k=2
+        top_k=10
     ):
 
         retrieved_chunks = self.retrieve(
