@@ -1,8 +1,8 @@
 THRESHOLDS = {
-    "faithfulness": 4,
+    "faithfulness": 4.5,
     "relevance": 4,
-    "correctness": 4,
-    "overall": 4
+    "correctness": 4.7,
+    "overall": 4.2
 }
 
 
