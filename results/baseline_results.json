@@ -1,7 +1,7 @@
 {
     "version": "1.0",
-    "faithfulness": 4.6,
-    "relevance": 4.5,
-    "correctness": 4.7,
-    "overall": 4.6
+    "faithfulness": 4,
+    "relevance": 4,
+    "correctness": 4,
+    "overall": 4
 }

@@ -1,0 +1,103 @@
+{
+    "version": "1.1",
+    "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "pass_rate": 1.0,
+        "faithfulness": 5.0,
+        "relevance": 4.75,
+        "correctness": 5.0,
+        "overall": 4.75
+    },
+    "cases": [
+        {
+            "id": "q001",
+            "question": "Who created Python?",
+            "expected_answer": "Python was created by Guido van Rossum.",
+            "generated_answer": "Guido van Rossum.",
+            "evaluation": {
+                "faithfulness": {
+                    "score": 5,
+                    "reason": "The generated answer is supported by the context as it directly mentions Guido van Rossum, who was mentioned in all relevant chunks."
+                },
+                "relevance": {
+                    "score": 4,
+                    "reason": "The generated answer partially answers the question but lacks some details. It only states that Python was created by Guido van Rossum, but does not mention when it was released or its usage in different fields."
+                },
+                "correctness": {
+                    "score": 5,
+                    "reason": "The generated answer is factually correct as Guido van Rossum indeed created Python."
+                },
+                "overall_score": 4
+            },
+            "status": "PASS"
+        },
+        {
+            "id": "q002",
+            "question": "When was Python first released?",
+            "expected_answer": "Python was first released in 1991.",
+            "generated_answer": "Python was first released in 1991.",
+            "evaluation": {
+                "faithfulness": {
+                    "score": 5,
+                    "reason": "The generated answer is supported by the context, as it appears multiple times in the text."
+                },
+                "relevance": {
+                    "score": 5,
+                    "reason": "The generated answer directly answers the question, specifying the exact year Python was first released."
+                },
+                "correctness": {
+                    "score": 5,
+                    "reason": "The generated answer matches the expected answer factually correct."
+                },
+                "overall_score": 5
+            },
+            "status": "PASS"
+        },
+        {
+            "id": "q003",
+            "question": "What is machine learning?",
+            "expected_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
+            "generated_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
+            "evaluation": {
+                "faithfulness": {
+                    "score": 5,
+                    "reason": "The generated answer is identical to the expected answer, indicating that it is faithful to the context."
+                },
+                "relevance": {
+                    "score": 5,
+                    "reason": "The generated answer directly answers the question, showing relevance to the prompt."
+                },
+                "correctness": {
+                    "score": 5,
+                    "reason": "The generated answer matches the expected answer factually, indicating correctness."
+                },
+                "overall_score": 5
+            },
+            "status": "PASS"
+        },
+        {
+            "id": "q004",
+            "question": "What is artificial intelligence?",
+            "expected_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
+            "generated_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
+            "evaluation": {
+                "faithfulness": {
+                    "score": 5,
+                    "reason": "The generated answer is identical to the expected answer, indicating that it is fully supported by the context."
+                },
+                "relevance": {
+                    "score": 5,
+                    "reason": "The generated answer directly answers the question and contains all necessary information."
+                },
+                "correctness": {
+                    "score": 5,
+                    "reason": "The generated answer matches the expected answer in terms of content and accuracy."
+                },
+                "overall_score": 5
+            },
+            "status": "PASS"
+        }
+    ]
+}

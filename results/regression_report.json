@@ -1,0 +1,32 @@
+{
+    "baseline_version": "1.0",
+    "new_version": "1.1",
+    "tolerance": 0.2,
+    "metrics": {
+        "faithfulness": {
+            "baseline": 4,
+            "new": 5.0,
+            "difference": 1.0,
+            "regression": false
+        },
+        "relevance": {
+            "baseline": 4,
+            "new": 4.75,
+            "difference": 0.75,
+            "regression": false
+        },
+        "correctness": {
+            "baseline": 4,
+            "new": 5.0,
+            "difference": 1.0,
+            "regression": false
+        },
+        "overall": {
+            "baseline": 4,
+            "new": 4.75,
+            "difference": 0.75,
+            "regression": false
+        }
+    },
+    "overall_status": "PASS"
+}

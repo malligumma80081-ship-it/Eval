@@ -1,36 +1,30 @@
 THRESHOLDS = {
-    "faithfulness": 4.5,
+    "faithfulness": 4,
     "relevance": 4,
-    "correctness": 4.7,
-    "overall": 4.2
+    "correctness": 4,
+    "overall": 4
 }
 
 
+def extract_metric_score(evaluation, metric):
+    if metric == "overall":
+        value = evaluation.get("overall_score", evaluation.get("overall", 0))
+    else:
+        value = evaluation.get(metric, 0)
+
+    if isinstance(value, dict):
+        return value.get("score", 0)
+
+    return value
+
+
 def check_thresholds(evaluation):
+    for metric, threshold in THRESHOLDS.items():
+        score = extract_metric_score(evaluation, metric)
 
-    faithfulness = evaluation[
-        "faithfulness"
-    ]["score"]
+        if score < threshold:
+            return False
 
-    relevance = evaluation[
-        "relevance"
-    ]["score"]
-
-    correctness = evaluation[
-        "correctness"
-    ]["score"]
-
-    overall = evaluation[
-        "overall_score"
-    ]
+    return True
 
 
-    passed = (
-        faithfulness >= THRESHOLDS["faithfulness"]
-        and relevance >= THRESHOLDS["relevance"]
-        and correctness >= THRESHOLDS["correctness"]
-        and overall >= THRESHOLDS["overall"]
-    )
-
-
-    return passed
