@@ -2,13 +2,13 @@
     "version": "1.1",
     "summary": {
         "total": 4,
-        "passed": 4,
-        "failed": 0,
-        "pass_rate": 1.0,
-        "faithfulness": 5.0,
-        "relevance": 4.75,
-        "correctness": 5.0,
-        "overall": 4.75
+        "passed": 3,
+        "failed": 1,
+        "pass_rate": 0.75,
+        "faithfulness": 4.25,
+        "relevance": 4.0,
+        "correctness": 4.25,
+        "overall": 4.5
     },
     "cases": [
         {
@@ -19,17 +19,17 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is supported by the context as it directly mentions Guido van Rossum, who was mentioned in all relevant chunks."
+                    "reason": "The generated answer matches the context, as it provides the name of the creator."
                 },
                 "relevance": {
-                    "score": 4,
-                    "reason": "The generated answer partially answers the question but lacks some details. It only states that Python was created by Guido van Rossum, but does not mention when it was released or its usage in different fields."
+                    "score": 5,
+                    "reason": "The generated answer directly answers who created Python."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer is factually correct as Guido van Rossum indeed created Python."
+                    "reason": "The generated answer matches the expected answer, as both mention Guido van Rossum."
                 },
-                "overall_score": 4
+                "overall_score": 5
             },
             "status": "PASS"
         },
@@ -41,15 +41,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is supported by the context, as it appears multiple times in the text."
+                    "reason": "The generated answer is identical to the expected answer, indicating that it is fully supported by the context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question, specifying the exact year Python was first released."
+                    "reason": "The generated answer directly answers the question about when Python was first released."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer factually correct."
+                    "reason": "The generated answer matches the expected answer factually, indicating that it is correct."
                 },
                 "overall_score": 5
             },
@@ -63,15 +63,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, indicating that it is faithful to the context."
+                    "reason": "The generated answer is identical to the expected answer, suggesting that it has been retrieved from a reliable source or generated based on the context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question, showing relevance to the prompt."
+                    "reason": "The generated answer directly answers the question, providing a clear and concise definition of machine learning."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer factually, indicating correctness."
+                    "reason": "The generated answer matches the expected answer factually, indicating that it is correct and accurate."
                 },
                 "overall_score": 5
             },
@@ -81,23 +81,23 @@
             "id": "q004",
             "question": "What is artificial intelligence?",
             "expected_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
-            "generated_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
+            "generated_answer": "I don't know based on the provided context. The provided text only discusses machine learning and Python programming language, but does not directly define what artificial intelligence is.",
             "evaluation": {
                 "faithfulness": {
-                    "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, indicating that it is fully supported by the context."
+                    "score": 2,
+                    "reason": "The generated answer does not directly reference the provided context, but it acknowledges that machine learning and Python programming language are discussed."
                 },
                 "relevance": {
-                    "score": 5,
-                    "reason": "The generated answer directly answers the question and contains all necessary information."
+                    "score": 1,
+                    "reason": "The generated answer does not directly answer the question about artificial intelligence."
                 },
                 "correctness": {
-                    "score": 5,
-                    "reason": "The generated answer matches the expected answer in terms of content and accuracy."
+                    "score": 2,
+                    "reason": "The generated answer is partially correct in stating that machine learning and Python are discussed, but it incorrectly concludes that they do not provide information on artificial intelligence."
                 },
-                "overall_score": 5
+                "overall_score": 3
             },
-            "status": "PASS"
+            "status": "FAIL"
         }
     ]
 }

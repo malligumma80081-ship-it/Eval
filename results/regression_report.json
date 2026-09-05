@@ -4,29 +4,29 @@
     "tolerance": 0.2,
     "metrics": {
         "faithfulness": {
-            "baseline": 4,
-            "new": 5.0,
-            "difference": 1.0,
+            "baseline": 4.2,
+            "new": 4.25,
+            "difference": 0.04999999999999982,
             "regression": false
         },
         "relevance": {
-            "baseline": 4,
-            "new": 4.75,
-            "difference": 0.75,
-            "regression": false
+            "baseline": 4.4,
+            "new": 4.0,
+            "difference": -0.40000000000000036,
+            "regression": true
         },
         "correctness": {
-            "baseline": 4,
-            "new": 5.0,
-            "difference": 1.0,
+            "baseline": 4.3,
+            "new": 4.25,
+            "difference": -0.04999999999999982,
             "regression": false
         },
         "overall": {
-            "baseline": 4,
-            "new": 4.75,
-            "difference": 0.75,
+            "baseline": 4.3,
+            "new": 4.5,
+            "difference": 0.20000000000000018,
             "regression": false
         }
     },
-    "overall_status": "PASS"
+    "overall_status": "REGRESSION"
 }

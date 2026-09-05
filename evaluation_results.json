@@ -3,7 +3,7 @@
         "id": "q001",
         "question": "Who created Python?",
         "expected_answer": "Python was created by Guido van Rossum.",
-        "generated_answer": "Guido van Rossum.",
+        "generated_answer": "Python was created by Guido van Rossum.",
         "evaluation": {
             "faithfulness": {
                 "score": 5,
