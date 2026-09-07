@@ -7,7 +7,12 @@ from app.rag.rag_retriever import (
 from app.evaluation.retrieval_metrics import (
     context_precision,
     context_recall,
-    hit_rate
+    hit_rate,
+    precision_at_k,
+    recall_at_k,
+    hit_rate_at_k,
+    reciprocal_rank,
+    ndcg_at_k
 )
 
 
@@ -63,6 +68,39 @@ def main():
             relevant_sources
         )
 
+        precision_k = precision_at_k(
+            retrieved_sources,
+            relevant_sources,
+            5
+        )
+
+        recall_k = recall_at_k(
+            retrieved_sources,
+            relevant_sources,
+            5
+        )
+
+        hit_k = hit_rate_at_k(
+            retrieved_sources,
+            relevant_sources,
+            5
+        )
+
+        rr = reciprocal_rank(
+            retrieved_sources,
+            relevant_sources
+        )
+
+        relevance_scores = [
+            1 if source in relevant_sources else 0
+            for source in retrieved_sources[:5]
+        ]
+
+        ndcg_k = ndcg_at_k(
+            relevance_scores,
+            5
+        )
+
 
         result = {
             "question": question,
@@ -74,7 +112,12 @@ def main():
             ),
             "precision": precision,
             "recall": recall,
-            "hit_rate": hit
+            "hit_rate": hit,
+            "precision_at_5": precision_k,
+            "recall_at_5": recall_k,
+            "hit_rate_at_5": hit_k,
+            "reciprocal_rank": rr,
+            "ndcg_at_5": ndcg_k
         }
 
 
@@ -105,6 +148,26 @@ def main():
 
         print(
             f"Hit Rate: {hit}"
+        )
+
+        print(
+            f"Precision@5: {precision_k:.2f}"
+        )
+
+        print(
+            f"Recall@5: {recall_k:.2f}"
+        )
+
+        print(
+            f"Hit Rate@5: {hit_k:.2f}"
+        )
+
+        print(
+            f"Reciprocal Rank: {rr:.2f}"
+        )
+
+        print(
+            f"NDCG@5: {ndcg_k:.2f}"
         )
 
         print("\nRetrieved chunks:")

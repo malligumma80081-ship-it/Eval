@@ -4,6 +4,15 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from app.evaluation.retrieval_metrics import (
+    hit_rate_at_k,
+    ndcg_at_k,
+    precision_at_k,
+    reciprocal_rank,
+    recall_at_k,
+)
+from app.rag.rag_retriever import RAGRetriever
+
 
 RESULTS_FILE = Path(
     "results/current_results.json"
@@ -13,11 +22,83 @@ REGRESSION_FILE = Path(
     "results/regression_report.json"
 )
 
+RETRIEVAL_DATASET_FILE = Path(
+    "data/retrieval_dataset.json"
+)
+
 
 def extract_score(value):
     if isinstance(value, dict):
         return value.get("score", 0)
     return value
+
+
+@st.cache_data(show_spinner=False)
+def compute_retrieval_metrics(top_k=5):
+    if not RETRIEVAL_DATASET_FILE.exists():
+        return {
+            "precision": 0.0,
+            "recall": 0.0,
+            "hit_rate": 0.0,
+            "reciprocal_rank": 0.0,
+            "ndcg": 0.0,
+            "details": []
+        }
+
+    with open(RETRIEVAL_DATASET_FILE, "r", encoding="utf-8") as file:
+        dataset = json.load(file)
+
+    retriever = RAGRetriever("data/documents")
+    details = []
+
+    precision_values = []
+    recall_values = []
+    hit_values = []
+    rr_values = []
+    ndcg_values = []
+
+    for item in dataset:
+        question = item["question"]
+        relevant_sources = item["relevant_sources"]
+
+        retrieved = retriever.retrieve(question, top_k=top_k)
+        retrieved_sources = [result["source"] for result in retrieved]
+
+        precision = precision_at_k(retrieved_sources, relevant_sources, top_k)
+        recall = recall_at_k(retrieved_sources, relevant_sources, top_k)
+        hit = hit_rate_at_k(retrieved_sources, relevant_sources, top_k)
+        rr = reciprocal_rank(retrieved_sources, relevant_sources)
+        relevance_scores = [
+            1 if source in relevant_sources else 0
+            for source in retrieved_sources[:top_k]
+        ]
+        ndcg = ndcg_at_k(relevance_scores, top_k)
+
+        precision_values.append(precision)
+        recall_values.append(recall)
+        hit_values.append(hit)
+        rr_values.append(rr)
+        ndcg_values.append(ndcg)
+
+        details.append({
+            "Question": question,
+            "Relevant": relevant_sources,
+            "Retrieved": retrieved_sources,
+            "Precision@K": round(precision, 4),
+            "Recall@K": round(recall, 4),
+            "HitRate@K": round(hit, 4),
+            "Reciprocal": round(rr, 4),
+            "NDCG@K": round(ndcg, 4),
+        })
+
+    return {
+        "precision": sum(precision_values) / len(precision_values) if precision_values else 0.0,
+        "recall": sum(recall_values) / len(recall_values) if recall_values else 0.0,
+        "hit_rate": sum(hit_values) / len(hit_values) if hit_values else 0.0,
+        "reciprocal_rank": sum(rr_values) / len(rr_values) if rr_values else 0.0,
+        "ndcg": sum(ndcg_values) / len(ndcg_values) if ndcg_values else 0.0,
+        "details": details,
+    }
 
 
 # ---------------------------------------
@@ -110,6 +191,25 @@ col5.metric(
 
 
 st.divider()
+
+
+# ---------------------------------------
+# Retrieval Metrics
+# ---------------------------------------
+
+st.header("Retrieval Metrics")
+
+retrieval_metrics = compute_retrieval_metrics(top_k=5)
+retrieval_cols = st.columns(5)
+retrieval_cols[0].metric("Precision@5", f"{retrieval_metrics['precision']:.2%}")
+retrieval_cols[1].metric("Recall@5", f"{retrieval_metrics['recall']:.2%}")
+retrieval_cols[2].metric("Hit Rate@5", f"{retrieval_metrics['hit_rate']:.2%}")
+retrieval_cols[3].metric("Reciprocal Rank", f"{retrieval_metrics['reciprocal_rank']:.2%}")
+retrieval_cols[4].metric("NDCG@5", f"{retrieval_metrics['ndcg']:.2%}")
+
+retrieval_df = pd.DataFrame(retrieval_metrics["details"])
+if not retrieval_df.empty:
+    st.dataframe(retrieval_df, use_container_width=True)
 
 
 # ---------------------------------------
