@@ -4,7 +4,10 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from app.evaluation.generation_metrics import answer_relevance_score
 from app.evaluation.retrieval_metrics import (
+    context_precision,
+    context_recall,
     hit_rate_at_k,
     ndcg_at_k,
     precision_at_k,
@@ -31,6 +34,60 @@ def extract_score(value):
     if isinstance(value, dict):
         return value.get("score", 0)
     return value
+
+
+@st.cache_data(show_spinner=False)
+def compute_rag_quality_metrics(top_k=5):
+    metrics = {
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "faithfulness": 0.0,
+        "answer_relevance": 0.0,
+        "details": []
+    }
+
+    if RETRIEVAL_DATASET_FILE.exists():
+        with open(RETRIEVAL_DATASET_FILE, "r", encoding="utf-8") as file:
+            dataset = json.load(file)
+
+        retriever = RAGRetriever("data/documents")
+        precision_values = []
+        recall_values = []
+
+        for item in dataset:
+            question = item["question"]
+            relevant_sources = item["relevant_sources"]
+            retrieved = retriever.retrieve(question, top_k=top_k)
+            retrieved_sources = [result["source"] for result in retrieved]
+
+            precision_values.append(context_precision(retrieved_sources, relevant_sources))
+            recall_values.append(context_recall(retrieved_sources, relevant_sources))
+
+        metrics["context_precision"] = (
+            sum(precision_values) / len(precision_values) if precision_values else 0.0
+        )
+        metrics["context_recall"] = (
+            sum(recall_values) / len(recall_values) if recall_values else 0.0
+        )
+
+    if RESULTS_FILE.exists():
+        with open(RESULTS_FILE, "r", encoding="utf-8") as file:
+            results = json.load(file)
+
+        case_scores = []
+        relevance_scores = []
+
+        for case in results.get("cases", []):
+            evaluation = case.get("evaluation", {})
+            case_scores.append(extract_score(evaluation.get("faithfulness", 0)))
+            relevance_scores.append(answer_relevance_score(case.get("question", ""), case.get("generated_answer", "")))
+
+        if case_scores:
+            metrics["faithfulness"] = sum(case_scores) / len(case_scores)
+        if relevance_scores:
+            metrics["answer_relevance"] = sum(relevance_scores) / len(relevance_scores)
+
+    return metrics
 
 
 @st.cache_data(show_spinner=False)
@@ -194,11 +251,19 @@ st.divider()
 
 
 # ---------------------------------------
-# Retrieval Metrics
+# Retrieval & RAG Quality Metrics
 # ---------------------------------------
 
-st.header("Retrieval Metrics")
+st.header("RAG Quality Metrics")
 
+rag_quality = compute_rag_quality_metrics(top_k=5)
+quality_cols = st.columns(4)
+quality_cols[0].metric("Context Precision", f"{rag_quality['context_precision']:.2%}")
+quality_cols[1].metric("Context Recall", f"{rag_quality['context_recall']:.2%}")
+quality_cols[2].metric("Faithfulness", f"{rag_quality['faithfulness']:.2%}")
+quality_cols[3].metric("Answer Relevance", f"{rag_quality['answer_relevance']:.2%}")
+
+st.subheader("Retrieval Metrics")
 retrieval_metrics = compute_retrieval_metrics(top_k=5)
 retrieval_cols = st.columns(5)
 retrieval_cols[0].metric("Precision@5", f"{retrieval_metrics['precision']:.2%}")

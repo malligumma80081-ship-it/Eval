@@ -6,28 +6,28 @@
         "failed": 1,
         "pass_rate": 0.75,
         "faithfulness": 4.25,
-        "relevance": 4.0,
+        "relevance": 4.5,
         "correctness": 4.25,
-        "overall": 4.5
+        "overall": 4.25
     },
     "cases": [
         {
             "id": "q001",
             "question": "Who created Python?",
             "expected_answer": "Python was created by Guido van Rossum.",
-            "generated_answer": "Guido van Rossum.",
+            "generated_answer": "The creator of Python is Guido van Rossum.",
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer matches the context, as it provides the name of the creator."
+                    "reason": "The generated answer is identical to the expected answer, indicating that it is supported by the context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers who created Python."
+                    "reason": "The generated answer directly answers the question, providing the same information as the expected answer."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer, as both mention Guido van Rossum."
+                    "reason": "The generated answer matches the expected answer factually, indicating that it is correct."
                 },
                 "overall_score": 5
             },
@@ -41,15 +41,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, indicating that it is fully supported by the context."
+                    "reason": "The generated answer is identical to the expected answer, indicating that it is faithful to the context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question about when Python was first released."
+                    "reason": "The generated answer directly answers the question and does not provide extraneous information."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer factually, indicating that it is correct."
+                    "reason": "The generated answer matches the expected answer in terms of factual correctness, with both stating that Python was first released in 1991."
                 },
                 "overall_score": 5
             },
@@ -59,45 +59,45 @@
             "id": "q003",
             "question": "What is machine learning?",
             "expected_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
-            "generated_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
+            "generated_answer": "Machine learning allows computers to learn patterns from data.",
             "evaluation": {
                 "faithfulness": {
-                    "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, suggesting that it has been retrieved from a reliable source or generated based on the context."
+                    "score": 2,
+                    "reason": "The generated answer lacks the branch of artificial intelligence connection, which is present in the context."
                 },
                 "relevance": {
-                    "score": 5,
-                    "reason": "The generated answer directly answers the question, providing a clear and concise definition of machine learning."
+                    "score": 3,
+                    "reason": "The generated answer partially answers the question but misses the 'branch of artificial intelligence' part."
                 },
                 "correctness": {
-                    "score": 5,
-                    "reason": "The generated answer matches the expected answer factually, indicating that it is correct and accurate."
+                    "score": 2,
+                    "reason": "The generated answer is factually correct in that it allows computers to learn patterns from data, but lacks the 'branch of artificial intelligence' detail."
                 },
-                "overall_score": 5
+                "overall_score": 2
             },
-            "status": "PASS"
+            "status": "FAIL"
         },
         {
             "id": "q004",
             "question": "What is artificial intelligence?",
             "expected_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
-            "generated_answer": "I don't know based on the provided context. The provided text only discusses machine learning and Python programming language, but does not directly define what artificial intelligence is.",
+            "generated_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
             "evaluation": {
                 "faithfulness": {
-                    "score": 2,
-                    "reason": "The generated answer does not directly reference the provided context, but it acknowledges that machine learning and Python programming language are discussed."
+                    "score": 5,
+                    "reason": "The generated answer is identical to the expected answer, indicating that it accurately represents the context."
                 },
                 "relevance": {
-                    "score": 1,
-                    "reason": "The generated answer does not directly answer the question about artificial intelligence."
+                    "score": 5,
+                    "reason": "The generated answer directly addresses the question and provides a clear definition of artificial intelligence."
                 },
                 "correctness": {
-                    "score": 2,
-                    "reason": "The generated answer is partially correct in stating that machine learning and Python are discussed, but it incorrectly concludes that they do not provide information on artificial intelligence."
+                    "score": 5,
+                    "reason": "The generated answer is factually correct and matches the expected answer, providing an accurate definition of artificial intelligence."
                 },
-                "overall_score": 3
+                "overall_score": 5
             },
-            "status": "FAIL"
+            "status": "PASS"
         }
     ]
 }
