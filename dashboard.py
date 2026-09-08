@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 
 from app.evaluation.generation_metrics import answer_relevance_score
+from app.evaluation.hallucination import evaluate_hallucination
 from app.evaluation.retrieval_metrics import (
     context_precision,
     context_recall,
@@ -36,6 +37,24 @@ def extract_score(value):
     return value
 
 
+def parse_hallucination_score(raw_response):
+    if isinstance(raw_response, (int, float)):
+        return float(raw_response)
+
+    if isinstance(raw_response, dict):
+        return float(raw_response.get("score", 0.0))
+
+    text = str(raw_response).strip()
+    if not text:
+        return 0.0
+
+    try:
+        payload = json.loads(text)
+        return float(payload.get("score", 0.0))
+    except json.JSONDecodeError:
+        return 0.0
+
+
 @st.cache_data(show_spinner=False)
 def compute_rag_quality_metrics(top_k=5):
     metrics = {
@@ -43,6 +62,7 @@ def compute_rag_quality_metrics(top_k=5):
         "context_recall": 0.0,
         "faithfulness": 0.0,
         "answer_relevance": 0.0,
+        "hallucination": 0.0,
         "details": []
     }
 
@@ -76,16 +96,31 @@ def compute_rag_quality_metrics(top_k=5):
 
         case_scores = []
         relevance_scores = []
+        hallucination_scores = []
+
+        retriever = RAGRetriever("data/documents")
 
         for case in results.get("cases", []):
             evaluation = case.get("evaluation", {})
+            question = case.get("question", "")
+            answer = case.get("generated_answer", "")
+
             case_scores.append(extract_score(evaluation.get("faithfulness", 0)))
-            relevance_scores.append(answer_relevance_score(case.get("question", ""), case.get("generated_answer", "")))
+            relevance_scores.append(answer_relevance_score(question, answer))
+
+            context = "\n\n".join(
+                result["text"] for result in retriever.retrieve(question, top_k=top_k)
+            )
+
+            raw_result = evaluate_hallucination(question, context, answer)
+            hallucination_scores.append(parse_hallucination_score(raw_result))
 
         if case_scores:
             metrics["faithfulness"] = sum(case_scores) / len(case_scores)
         if relevance_scores:
             metrics["answer_relevance"] = sum(relevance_scores) / len(relevance_scores)
+        if hallucination_scores:
+            metrics["hallucination"] = sum(hallucination_scores) / len(hallucination_scores)
 
     return metrics
 
@@ -257,11 +292,12 @@ st.divider()
 st.header("RAG Quality Metrics")
 
 rag_quality = compute_rag_quality_metrics(top_k=5)
-quality_cols = st.columns(4)
+quality_cols = st.columns(5)
 quality_cols[0].metric("Context Precision", f"{rag_quality['context_precision']:.2%}")
 quality_cols[1].metric("Context Recall", f"{rag_quality['context_recall']:.2%}")
 quality_cols[2].metric("Faithfulness", f"{rag_quality['faithfulness']:.2%}")
 quality_cols[3].metric("Answer Relevance", f"{rag_quality['answer_relevance']:.2%}")
+quality_cols[4].metric("Hallucination", f"{(rag_quality['hallucination'] / 5):.2%}")
 
 st.subheader("Retrieval Metrics")
 retrieval_metrics = compute_retrieval_metrics(top_k=5)

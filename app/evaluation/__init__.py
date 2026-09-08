@@ -1,3 +1,7 @@
-from app.llm.evaluation.evaluator import Evaluator
+"""Evaluation package exports.
 
-__all__ = ["Evaluator"]
+Keep package imports lightweight so evaluation utilities can be imported
+without pulling in optional runtime dependencies such as the Ollama client.
+"""
+
+__all__ = []

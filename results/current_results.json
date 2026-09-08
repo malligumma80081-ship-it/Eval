@@ -15,19 +15,19 @@
             "id": "q001",
             "question": "Who created Python?",
             "expected_answer": "Python was created by Guido van Rossum.",
-            "generated_answer": "The creator of Python is Guido van Rossum.",
+            "generated_answer": "Python was created by Guido van Rossum.",
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, indicating that it is supported by the context."
+                    "reason": "The generated answer is identical to the context, indicating that it is fully supported and does not require any additional information."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question, providing the same information as the expected answer."
+                    "reason": "The generated answer directly answers the question and provides a clear and concise statement about who created Python."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer factually, indicating that it is correct."
+                    "reason": "The generated answer matches the expected answer, indicating that it is factually correct. Guido van Rossum is indeed the creator of Python."
                 },
                 "overall_score": 5
             },
@@ -41,15 +41,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, indicating that it is faithful to the context."
+                    "reason": "The generated answer matches the context exactly and is free of any additional information."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question and does not provide extraneous information."
+                    "reason": "The generated answer directly answers the question 'When was Python first released?'"
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer in terms of factual correctness, with both stating that Python was first released in 1991."
+                    "reason": "The generated answer is factually correct, matching the expected answer exactly."
                 },
                 "overall_score": 5
             },
@@ -59,19 +59,19 @@
             "id": "q003",
             "question": "What is machine learning?",
             "expected_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
-            "generated_answer": "Machine learning allows computers to learn patterns from data.",
+            "generated_answer": "Machine learning is a branch of artificial intelligence.",
             "evaluation": {
                 "faithfulness": {
                     "score": 2,
-                    "reason": "The generated answer lacks the branch of artificial intelligence connection, which is present in the context."
+                    "reason": "The generated answer omits the crucial part that 'allows computers to learn patterns from data', reducing faithfulness."
                 },
                 "relevance": {
                     "score": 3,
-                    "reason": "The generated answer partially answers the question but misses the 'branch of artificial intelligence' part."
+                    "reason": "The generated answer directly answers a key aspect of the question, but not the entire question."
                 },
                 "correctness": {
                     "score": 2,
-                    "reason": "The generated answer is factually correct in that it allows computers to learn patterns from data, but lacks the 'branch of artificial intelligence' detail."
+                    "reason": "The generated answer is partially correct in that it correctly identifies machine learning as a branch of artificial intelligence, however, it does not capture the full scope of what machine learning entails."
                 },
                 "overall_score": 2
             },
@@ -85,15 +85,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is identical to the expected answer, indicating that it accurately represents the context."
+                    "reason": "The generated answer exactly matches the context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly addresses the question and provides a clear definition of artificial intelligence."
+                    "reason": "The generated answer directly answers the question."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer is factually correct and matches the expected answer, providing an accurate definition of artificial intelligence."
+                    "reason": "The generated answer is factually correct and identical to the expected answer."
                 },
                 "overall_score": 5
             },
