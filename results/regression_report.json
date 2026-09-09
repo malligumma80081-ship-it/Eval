@@ -11,15 +11,15 @@
         },
         "relevance": {
             "baseline": 4.4,
-            "new": 4.5,
-            "difference": 0.09999999999999964,
+            "new": 4.75,
+            "difference": 0.34999999999999964,
             "regression": false
         },
         "correctness": {
             "baseline": 4.3,
-            "new": 4.25,
-            "difference": -0.04999999999999982,
-            "regression": false
+            "new": 4.0,
+            "difference": -0.2999999999999998,
+            "regression": true
         },
         "overall": {
             "baseline": 4.3,
@@ -28,5 +28,5 @@
             "regression": false
         }
     },
-    "overall_status": "PASS"
+    "overall_status": "REGRESSION"
 }

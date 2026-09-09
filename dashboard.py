@@ -193,6 +193,43 @@ def compute_retrieval_metrics(top_k=5):
     }
 
 
+@st.cache_data(show_spinner=False)
+def compare_prompt_variants(dataset=None, top_k=5):
+    if dataset is None:
+        dataset = []
+        if RETRIEVAL_DATASET_FILE.exists():
+            with open(RETRIEVAL_DATASET_FILE, "r", encoding="utf-8") as file:
+                dataset = json.load(file)
+
+    retriever = RAGRetriever("data/documents")
+    results = []
+
+    for item in dataset:
+        question = item["question"]
+        relevant_sources = item.get("relevant_sources", [])
+        context = "\n\n".join(
+            result["text"]
+            for result in retriever.retrieve(question, top_k=top_k)
+        )
+
+        comparison = {
+            "question": question,
+            "prompt_a": None,
+            "prompt_b": None,
+            "winner": None,
+        }
+
+        from app.evaluation.ab_test import compare_prompts
+
+        outcome = compare_prompts(question, context, "")
+        comparison["prompt_a"] = outcome["prompt_a"]
+        comparison["prompt_b"] = outcome["prompt_b"]
+        comparison["winner"] = outcome["winner"]
+        results.append(comparison)
+
+    return results
+
+
 # ---------------------------------------
 # Page configuration
 # ---------------------------------------
@@ -201,6 +238,33 @@ st.set_page_config(
     page_title="LLM Evaluation Dashboard",
     page_icon="📊",
     layout="wide"
+)
+
+st.markdown(
+    """
+    <style>
+        .stApp {
+            background: linear-gradient(180deg, #f5f7ff 0%, #eef4ff 100%);
+        }
+        div[data-testid="stMetricContainer"] {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(79, 117, 255, 0.15);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            box-shadow: 0 4px 12px rgba(79, 117, 255, 0.08);
+        }
+        div[data-testid="stDataFrame"] {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .section-title {
+            color: #1f2a44;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
 
@@ -244,10 +308,11 @@ st.title(
     "📊 LLM / RAG Evaluation Dashboard"
 )
 
-st.write(
+st.caption(
     f"Evaluation Version: **{results['version']}**"
 )
 
+st.markdown('<div class="section-title">Overview</div>', unsafe_allow_html=True)
 
 # ---------------------------------------
 # KPI Metrics
@@ -289,7 +354,7 @@ st.divider()
 # Retrieval & RAG Quality Metrics
 # ---------------------------------------
 
-st.header("RAG Quality Metrics")
+st.markdown('<div class="section-title">RAG Quality Metrics</div>', unsafe_allow_html=True)
 
 rag_quality = compute_rag_quality_metrics(top_k=5)
 quality_cols = st.columns(5)
@@ -299,7 +364,7 @@ quality_cols[2].metric("Faithfulness", f"{rag_quality['faithfulness']:.2%}")
 quality_cols[3].metric("Answer Relevance", f"{rag_quality['answer_relevance']:.2%}")
 quality_cols[4].metric("Hallucination", f"{(rag_quality['hallucination'] / 5):.2%}")
 
-st.subheader("Retrieval Metrics")
+st.markdown('<div class="section-title">Retrieval Metrics</div>', unsafe_allow_html=True)
 retrieval_metrics = compute_retrieval_metrics(top_k=5)
 retrieval_cols = st.columns(5)
 retrieval_cols[0].metric("Precision@5", f"{retrieval_metrics['precision']:.2%}")
@@ -311,6 +376,29 @@ retrieval_cols[4].metric("NDCG@5", f"{retrieval_metrics['ndcg']:.2%}")
 retrieval_df = pd.DataFrame(retrieval_metrics["details"])
 if not retrieval_df.empty:
     st.dataframe(retrieval_df, use_container_width=True)
+
+st.markdown('<div class="section-title">Prompt A vs Prompt B</div>', unsafe_allow_html=True)
+
+prompt_ab_results = compare_prompt_variants(dataset=[]) if False else compare_prompt_variants(dataset=[{"question": q["question"]} for q in (json.load(open(RETRIEVAL_DATASET_FILE, "r", encoding="utf-8")) if RETRIEVAL_DATASET_FILE.exists() else [])])
+
+prompt_rows = []
+for item in prompt_ab_results:
+    prompt_rows.append({
+        "Question": item["question"],
+        "Prompt A": item["prompt_a"]["score"]["overall"],
+        "Prompt B": item["prompt_b"]["score"]["overall"],
+        "Winner": item["winner"],
+    })
+
+if prompt_rows:
+    prompt_df = pd.DataFrame(prompt_rows)
+    st.dataframe(prompt_df, use_container_width=True)
+
+    a_wins = sum(1 for row in prompt_rows if row["Winner"] == "Prompt A")
+    b_wins = sum(1 for row in prompt_rows if row["Winner"] == "Prompt B")
+    st.caption(f"Prompt A wins: {a_wins} | Prompt B wins: {b_wins}")
+else:
+    st.info("No prompt A/B results available yet.")
 
 
 # ---------------------------------------
