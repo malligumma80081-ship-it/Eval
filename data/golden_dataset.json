@@ -12,7 +12,7 @@
     {
         "id": "q003",
         "question": "What is machine learning?",
-        "expected_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data."
+        "expected_answer": "Machine learning is a branch of artificial intelligence."
     },
     {
         "id": "q004",

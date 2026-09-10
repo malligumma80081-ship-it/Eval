@@ -1,0 +1,27 @@
+[
+  {
+    "id": "q001",
+    "question": "Who created Python?",
+    "context": "Python was created by Guido van Rossum.",
+    "answer": "Python was created by Guido van Rossum."
+  },
+  {
+    "id": "q002",
+    "question": "When was Python first released?",
+    "context": "Python was first released in 1991.",
+    "answer": "Python was first released in 1991."
+  },
+  {
+    "id": "q003",
+    "question": "What is machine learning?",
+    "context": "Machine learning is a branch of artificial intelligence.",
+    "answer": "Machine learning is a branch of artificial intelligence ."
+  },
+  {
+    "id": "q004",
+    "question": "What is artificial intelligence?",
+    "context": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
+    "answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence."
+    
+  }
+]

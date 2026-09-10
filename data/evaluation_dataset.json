@@ -12,7 +12,7 @@
     {
         "id": 3,
         "question": "What is artificial intelligence?",
-        "expected_answer": "Artificial intelligence is the field of creating systems that can perform tasks requiring human-like intelligence."
+        "expected_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence."
     },
     {
         "id": 4,

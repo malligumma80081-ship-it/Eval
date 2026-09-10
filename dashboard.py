@@ -22,6 +22,10 @@ RESULTS_FILE = Path(
     "results/current_results.json"
 )
 
+HUMAN_EVAL_FILE = Path(
+    "results/human_eval_results.json"
+)
+
 REGRESSION_FILE = Path(
     "results/regression_report.json"
 )
@@ -123,6 +127,26 @@ def compute_rag_quality_metrics(top_k=5):
             metrics["hallucination"] = sum(hallucination_scores) / len(hallucination_scores)
 
     return metrics
+
+
+@st.cache_data(show_spinner=False)
+def load_human_eval_summary():
+    if HUMAN_EVAL_FILE.exists():
+        try:
+            with open(HUMAN_EVAL_FILE, "r", encoding="utf-8") as file:
+                data = json.load(file)
+            if isinstance(data, dict):
+                return data
+        except json.JSONDecodeError:
+            pass
+
+    return {
+        "correctness": 0.0,
+        "relevance": 0.0,
+        "faithfulness": 0.0,
+        "completeness": 0.0,
+        "overall": 0.0,
+    }
 
 
 @st.cache_data(show_spinner=False)
@@ -376,6 +400,15 @@ retrieval_cols[4].metric("NDCG@5", f"{retrieval_metrics['ndcg']:.2%}")
 retrieval_df = pd.DataFrame(retrieval_metrics["details"])
 if not retrieval_df.empty:
     st.dataframe(retrieval_df, use_container_width=True)
+
+st.markdown('<div class="section-title">Human Evaluation</div>', unsafe_allow_html=True)
+human_metrics = load_human_eval_summary()
+human_cols = st.columns(5)
+human_cols[0].metric("Human Correctness", f"{human_metrics.get('correctness', 0.0):.2f} / 5")
+human_cols[1].metric("Human Relevance", f"{human_metrics.get('relevance', 0.0):.2f} / 5")
+human_cols[2].metric("Human Faithfulness", f"{human_metrics.get('faithfulness', 0.0):.2f} / 5")
+human_cols[3].metric("Human Completeness", f"{human_metrics.get('completeness', 0.0):.2f} / 5")
+human_cols[4].metric("Human Overall", f"{human_metrics.get('overall', 0.0):.2f} / 5")
 
 st.markdown('<div class="section-title">Prompt A vs Prompt B</div>', unsafe_allow_html=True)
 

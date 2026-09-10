@@ -5,8 +5,8 @@
         "passed": 3,
         "failed": 1,
         "pass_rate": 0.75,
-        "faithfulness": 4.25,
-        "relevance": 4.75,
+        "faithfulness": 5.0,
+        "relevance": 5.0,
         "correctness": 4.0,
         "overall": 4.25
     },
@@ -19,15 +19,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer exactly matches the context provided."
+                    "reason": "The generated answer is identical to the expected answer and is supported by the provided context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question about who created Python."
+                    "reason": "The generated answer directly answers the question"
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer is factually correct as it states that Python was created by Guido van Rossum."
+                    "reason": "The generated answer matches the expected answer in terms of factual correctness"
                 },
                 "overall_score": 5
             },
@@ -41,41 +41,41 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer is identical to the context, indicating that it is faithful and supported by the provided information."
+                    "reason": "The generated answer is identical to the context, indicating that it is completely faithful."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question and does not contain any additional or irrelevant information."
-                },
-                "correctness": {
-                    "score": 5,
-                    "reason": "The generated answer matches the expected answer in terms of content, indicating that it is factually correct."
-                },
-                "overall_score": 5
-            },
-            "status": "PASS"
-        },
-        {
-            "id": "q003",
-            "question": "What is machine learning?",
-            "expected_answer": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
-            "generated_answer": "Machine learning is a branch of artificial intelligence.",
-            "evaluation": {
-                "faithfulness": {
-                    "score": 2,
-                    "reason": "The generated answer is partially supported by the context, as it mentions machine learning being a branch of artificial intelligence. However, it lacks information about computers learning patterns from data."
-                },
-                "relevance": {
-                    "score": 4,
-                    "reason": "The generated answer directly answers the question, but it could be improved by providing more details or clarification."
+                    "reason": "The generated answer directly answers the question and is highly relevant."
                 },
                 "correctness": {
                     "score": 1,
-                    "reason": "The generated answer is factually incorrect compared to the expected answer, as it lacks information about computers learning patterns from data."
+                    "reason": "Unfortunately, the correct release year of Python is not supported by the context as it appears multiple times with a score of 3.4028234663852886e+38, indicating inaccuracy."
                 },
                 "overall_score": 2
             },
             "status": "FAIL"
+        },
+        {
+            "id": "q003",
+            "question": "What is machine learning?",
+            "expected_answer": "Machine learning is a branch of artificial intelligence.",
+            "generated_answer": "Machine learning is a branch of artificial intelligence.",
+            "evaluation": {
+                "faithfulness": {
+                    "score": 5,
+                    "reason": "The generated answer matches the context in terms of content and structure, indicating that it is faithful to the original text."
+                },
+                "relevance": {
+                    "score": 5,
+                    "reason": "The generated answer directly answers the question by stating what machine learning is, making it highly relevant to the query."
+                },
+                "correctness": {
+                    "score": 5,
+                    "reason": "Both the context and the expected answer indicate that machine learning is indeed a branch of artificial intelligence, making the generated answer factually correct."
+                },
+                "overall_score": 5
+            },
+            "status": "PASS"
         },
         {
             "id": "q004",
@@ -85,15 +85,15 @@
             "evaluation": {
                 "faithfulness": {
                     "score": 5,
-                    "reason": "The generated answer matches the context provided, as it is taken directly from the same source text."
+                    "reason": "The generated answer is identical to the expected answer and matches the context."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question by providing a definition of artificial intelligence."
+                    "reason": "The generated answer directly answers the question and provides the required information."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer, as it provides an accurate definition of artificial intelligence."
+                    "reason": "The generated answer is factually correct, as it matches the expected answer and aligns with the provided context."
                 },
                 "overall_score": 5
             },

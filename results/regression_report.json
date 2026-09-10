@@ -5,14 +5,14 @@
     "metrics": {
         "faithfulness": {
             "baseline": 4.2,
-            "new": 4.25,
-            "difference": 0.04999999999999982,
+            "new": 5.0,
+            "difference": 0.7999999999999998,
             "regression": false
         },
         "relevance": {
             "baseline": 4.4,
-            "new": 4.75,
-            "difference": 0.34999999999999964,
+            "new": 5.0,
+            "difference": 0.5999999999999996,
             "regression": false
         },
         "correctness": {

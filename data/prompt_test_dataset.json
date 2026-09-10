@@ -14,7 +14,7 @@
   {
     "id": "q003",
     "question": "What is machine learning?",
-    "context": "Machine learning is a branch of artificial intelligence that allows computers to learn patterns from data.",
+    "context": "Machine learning is a branch of artificial intelligence.",
     "reference_answer": "Machine learning is a branch of artificial intelligence."
   }
 ]
