@@ -1,22 +1,22 @@
 [
     {
         "id": "q001",
-        "question": "Who created Python?",
-        "expected_answer": "Python was created by Guido van Rossum."
+        "question": "What is hypertension?",
+        "expected_answer": "Hypertension is a condition in which blood pressure stays higher than normal for long periods of time."
     },
     {
         "id": "q002",
-        "question": "When was Python first released?",
-        "expected_answer": "Python was first released in 1991."
+        "question": "What are common symptoms of hypertension?",
+        "expected_answer": "Common symptoms of hypertension include headaches, dizziness, blurred vision, chest discomfort, and shortness of breath."
     },
     {
         "id": "q003",
-        "question": "What is machine learning?",
-        "expected_answer": "Machine learning is a branch of artificial intelligence."
+        "question": "What complications can hypertension cause?",
+        "expected_answer": "Hypertension can increase the risk of heart disease, stroke, kidney damage, and other serious complications."
     },
     {
         "id": "q004",
-        "question": "What is artificial intelligence?",
-        "expected_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence."
+        "question": "How is hypertension usually managed?",
+        "expected_answer": "Hypertension is usually managed with lifestyle changes, medication, and regular monitoring by a healthcare professional."
     }
 ]

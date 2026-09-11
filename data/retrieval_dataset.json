@@ -1,20 +1,20 @@
 [
     {
-        "question": "Who created Python?",
+        "question": "What is hypertension?",
         "relevant_sources": [
-            "python.txt"
+            "hypertension.txt"
         ]
     },
     {
-        "question": "What is machine learning?",
+        "question": "What are common symptoms of hypertension?",
         "relevant_sources": [
-            "machine_learning.txt"
+            "hypertension.txt"
         ]
     },
     {
-        "question": "What is artificial intelligence?",
+        "question": "How is hypertension usually managed?",
         "relevant_sources": [
-            "artificial_intelligence.txt"
+            "hypertension.txt"
         ]
     }
 ]

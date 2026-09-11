@@ -2,100 +2,100 @@
     "version": "1.1",
     "summary": {
         "total": 4,
-        "passed": 4,
-        "failed": 0,
-        "pass_rate": 1.0,
-        "faithfulness": 5.0,
-        "relevance": 5.0,
-        "correctness": 4.75,
-        "overall": 4.75
+        "passed": 1,
+        "failed": 3,
+        "pass_rate": 0.25,
+        "faithfulness": 3.5,
+        "relevance": 3.75,
+        "correctness": 4.25,
+        "overall": 3.75
     },
     "cases": [
         {
             "id": "q001",
-            "question": "Who created Python?",
-            "expected_answer": "Python was created by Guido van Rossum.",
-            "generated_answer": "Python was created by Guido van Rossum.",
+            "question": "What is hypertension?",
+            "expected_answer": "Hypertension is a condition in which blood pressure stays higher than normal for long periods of time.",
+            "generated_answer": "Hypertension is a medical condition in which blood pressure stays higher than normal for long periods of time.",
             "evaluation": {
                 "faithfulness": {
-                    "score": 5,
-                    "reason": "The generated answer is identical to the context, indicating a high level of faithfulness."
-                },
-                "relevance": {
-                    "score": 5,
-                    "reason": "The generated answer directly answers the question about who created Python."
-                },
-                "correctness": {
-                    "score": 5,
-                    "reason": "The generated answer matches the expected answer in terms of accuracy, indicating it is factually correct."
-                },
-                "overall_score": 5
-            },
-            "status": "PASS"
-        },
-        {
-            "id": "q002",
-            "question": "When was Python first released?",
-            "expected_answer": "Python was first released in 1991.",
-            "generated_answer": "Python was first released in 1991.",
-            "evaluation": {
-                "faithfulness": {
-                    "score": 5,
-                    "reason": "The generated answer is supported by the context, as it mentions that Python was first released in 1991."
-                },
-                "relevance": {
-                    "score": 5,
-                    "reason": "The generated answer directly answers the question about when Python was first released."
-                },
-                "correctness": {
                     "score": 4,
-                    "reason": "Although the generated answer is correct, it's worth noting that the score of 3.4028234663852886e+38 in one of the chunks suggests some redundancy or repetition in the provided context."
+                    "reason": "The generated answer is very similar to the context, with only minor differences in wording. However, it does not provide a more detailed explanation or additional information."
+                },
+                "relevance": {
+                    "score": 3,
+                    "reason": "The generated answer directly answers the question, but it could be more concise and to the point."
+                },
+                "correctness": {
+                    "score": 5,
+                    "reason": "The generated answer is factually correct compared to the expected answer, with no significant errors or omissions."
                 },
                 "overall_score": 4
             },
-            "status": "PASS"
+            "status": "FAIL"
+        },
+        {
+            "id": "q002",
+            "question": "What are common symptoms of hypertension?",
+            "expected_answer": "Common symptoms of hypertension include headaches, dizziness, blurred vision, chest discomfort, and shortness of breath.",
+            "generated_answer": "Common symptoms can include headaches, dizziness, blurred vision, chest discomfort, and shortness of breath.",
+            "evaluation": {
+                "faithfulness": {
+                    "score": 2,
+                    "reason": "The generated answer partially supports the context by mentioning common symptoms, but it does not explicitly state that they are associated with hypertension."
+                },
+                "relevance": {
+                    "score": 4,
+                    "reason": "The generated answer directly answers the question by listing some of the common symptoms, although it is missing the explicit connection to hypertension."
+                },
+                "correctness": {
+                    "score": 3,
+                    "reason": "The generated answer contains most of the expected information but omits 'headaches' and incorrectly includes 'chest discomfort'."
+                },
+                "overall_score": 3
+            },
+            "status": "FAIL"
         },
         {
             "id": "q003",
-            "question": "What is machine learning?",
-            "expected_answer": "Machine learning is a branch of artificial intelligence.",
-            "generated_answer": "Machine learning is a branch of artificial intelligence.",
+            "question": "What complications can hypertension cause?",
+            "expected_answer": "Hypertension can increase the risk of heart disease, stroke, kidney damage, and other serious complications.",
+            "generated_answer": "Hypertension increases the risk of heart disease, stroke, kidney damage, and other serious complications.",
             "evaluation": {
                 "faithfulness": {
-                    "score": 5,
-                    "reason": "The generated answer matches the context exactly and provides a definition of machine learning as a branch of artificial intelligence."
+                    "score": 4,
+                    "reason": "The generated answer is supported by the context and shares similar structure with the expected answer."
                 },
                 "relevance": {
-                    "score": 5,
-                    "reason": "The generated answer directly answers the question about what machine learning is."
+                    "score": 3,
+                    "reason": "The generated answer partially answers the question but lacks specificity about 'other serious complications'."
                 },
                 "correctness": {
                     "score": 5,
-                    "reason": "The generated answer matches the expected answer factually and accurately defines machine learning as a branch of artificial intelligence."
+                    "reason": "The generated answer is factually correct compared to the expected answer."
                 },
-                "overall_score": 5
+                "overall_score": 4
             },
-            "status": "PASS"
+            "status": "FAIL"
         },
         {
             "id": "q004",
-            "question": "What is artificial intelligence?",
-            "expected_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
-            "generated_answer": "Artificial intelligence is the field of building systems that can perform tasks that normally require human intelligence.",
+            "question": "How is hypertension usually managed?",
+            "expected_answer": "Hypertension is usually managed with lifestyle changes, medication, and regular monitoring by a healthcare professional.",
+            "generated_answer": "It is usually managed with lifestyle changes, medication, and regular monitoring by a healthcare professional.",
             "evaluation": {
                 "faithfulness": {
-                    "score": 5,
-                    "reason": "The generated answer exactly matches the expected answer and is supported by the context."
+                    "score": 4,
+                    "reason": "The generated answer is mostly faithful to the context, but it lacks some details and information that are present in the expected answer."
                 },
                 "relevance": {
                     "score": 5,
-                    "reason": "The generated answer directly answers the question and covers all required aspects."
+                    "reason": "The generated answer directly answers the question and provides a clear and concise response."
                 },
                 "correctness": {
-                    "score": 5,
-                    "reason": "The generated answer is factually correct and accurately describes artificial intelligence."
+                    "score": 4,
+                    "reason": "The generated answer is factually correct, but it does not include all the information present in the expected answer. For example, it does not mention that hypertension often has no obvious symptoms."
                 },
-                "overall_score": 5
+                "overall_score": 4
             },
             "status": "PASS"
         }

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "perf_001",
+    "question": "What is hypertension?"
+  },
+  {
+    "id": "perf_002",
+    "question": "What are common symptoms of diabetes?"
+  },
+  {
+    "id": "perf_003",
+    "question": "What is high cholesterol?"
+  },
+  {
+    "id": "perf_004",
+    "question": "What is anemia?"
+  },
+  {
+    "id": "perf_005",
+    "question": "What are common symptoms of asthma?"
+  }
+]

@@ -267,3 +267,12 @@ If the interviewer asks:
 ![alt text](image-4.png)
 
 
+python run_evaluation.py
+>> python evaluate_generation.py
+>> python evaluate_retrieval.py
+>> python evaluate_with_judge.py
+>> python test_performance.py
+>> python test_safety.py
+
+cd C:\Users\user\Desktop\EVAL
+streamlit run dashboard.py

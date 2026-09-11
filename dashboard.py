@@ -22,6 +22,10 @@ RESULTS_FILE = Path(
     "results/current_results.json"
 )
 
+PERFORMANCE_FILE = Path(
+    "results/performance_metrics.json"
+)
+
 HUMAN_EVAL_FILE = Path(
     "results/human_eval_results.json"
 )
@@ -57,6 +61,38 @@ def parse_hallucination_score(raw_response):
         return float(payload.get("score", 0.0))
     except json.JSONDecodeError:
         return 0.0
+
+
+@st.cache_data(show_spinner=False)
+def load_performance_summary():
+    default = {
+        "average_latency_sec": 0.0,
+        "p95_latency_sec": 0.0,
+        "p99_latency_sec": 0.0,
+        "cost_per_request": 0.0,
+    }
+
+    if PERFORMANCE_FILE.exists():
+        try:
+            with open(PERFORMANCE_FILE, "r", encoding="utf-8") as file:
+                data = json.load(file)
+            if isinstance(data, dict):
+                return {**default, **data}
+        except json.JSONDecodeError:
+            pass
+
+    if RESULTS_FILE.exists():
+        try:
+            with open(RESULTS_FILE, "r", encoding="utf-8") as file:
+                data = json.load(file)
+            if isinstance(data, dict):
+                perf = data.get("performance", data.get("latency", {}))
+                if isinstance(perf, dict):
+                    return {**default, **perf}
+        except json.JSONDecodeError:
+            pass
+
+    return default
 
 
 @st.cache_data(show_spinner=False)
@@ -322,12 +358,17 @@ summary = results["summary"]
 cases = results["cases"]
 
 summary_overall = summary.get("overall", 0)
-summary_safety = summary.get("safety")
+summary_safety = summary.get("safety", summary.get("safety_score"))
 if summary_safety is None:
     safety_scores = []
     for case in cases:
         evaluation = case.get("evaluation", {})
-        safety_scores.append(extract_score(evaluation.get("safety", 0)))
+        if "safety" in evaluation:
+            safety_scores.append(extract_score(evaluation.get("safety", 0)))
+        elif "safe" in evaluation and isinstance(evaluation["safe"], dict):
+            safety_scores.append(extract_score(evaluation["safe"]))
+        elif "safety_score" in evaluation:
+            safety_scores.append(extract_score(evaluation.get("safety_score", 0)))
     summary_safety = sum(safety_scores) / len(safety_scores) if safety_scores else 0.0
 
 
@@ -382,6 +423,15 @@ col6.metric(
     f"{summary_overall:.2f} / 5"
 )
 
+
+st.divider()
+
+performance_metrics = load_performance_summary()
+performance_cols = st.columns(4)
+performance_cols[0].metric("Avg Latency", f"{performance_metrics['average_latency_sec']:.2f} sec")
+performance_cols[1].metric("P95 Latency", f"{performance_metrics['p95_latency_sec']:.2f} sec")
+performance_cols[2].metric("Cost / Request", f"${performance_metrics['cost_per_request']:.4f}")
+performance_cols[3].metric("Safety", f"{summary_safety:.2f} / 5")
 
 st.divider()
 
@@ -490,13 +540,21 @@ for case in cases:
 
     evaluation = case["evaluation"]
 
+    safety_value = 0
+    if "safety" in evaluation:
+        safety_value = extract_score(evaluation.get("safety", 0))
+    elif "safe" in evaluation and isinstance(evaluation["safe"], dict):
+        safety_value = extract_score(evaluation["safe"])
+    elif "safety_score" in evaluation:
+        safety_value = extract_score(evaluation.get("safety_score", 0))
+
     table_data.append({
         "ID": case["id"],
         "Question": case["question"],
         "Faithfulness": extract_score(evaluation.get("faithfulness", 0)),
         "Relevance": extract_score(evaluation.get("relevance", 0)),
         "Correctness": extract_score(evaluation.get("correctness", 0)),
-        "Safety": extract_score(evaluation.get("safety", 0)),
+        "Safety": safety_value,
         "Overall": extract_score(evaluation.get("overall_score", evaluation.get("overall", 0))),
         "Status": case["status"]
     })

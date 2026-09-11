@@ -1,20 +1,20 @@
 [
   {
     "id": "q001",
-    "question": "Who created Python?",
-    "context": "Python was created by Guido van Rossum.",
-    "reference_answer": "Python was created by Guido van Rossum."
+    "question": "What is hypertension?",
+    "context": "Hypertension is a medical condition in which blood pressure stays higher than normal for long periods of time.",
+    "reference_answer": "Hypertension is a medical condition in which blood pressure stays higher than normal for long periods of time."
   },
   {
     "id": "q002",
-    "question": "When was Python first released?",
-    "context": "Python was first released in 1991.",
-    "reference_answer": "Python was first released in 1991."
+    "question": "What are common symptoms of hypertension?",
+    "context": "Common symptoms of hypertension include headaches, dizziness, blurred vision, chest discomfort, and shortness of breath.",
+    "reference_answer": "Common symptoms of hypertension include headaches, dizziness, blurred vision, chest discomfort, and shortness of breath."
   },
   {
     "id": "q003",
-    "question": "What is machine learning?",
-    "context": "Machine learning is a branch of artificial intelligence.",
-    "reference_answer": "Machine learning is a branch of artificial intelligence."
+    "question": "What complications can hypertension cause?",
+    "context": "Hypertension can increase the risk of heart disease, stroke, kidney damage, and other serious complications.",
+    "reference_answer": "Hypertension can increase the risk of heart disease, stroke, kidney damage, and other serious complications."
   }
 ]

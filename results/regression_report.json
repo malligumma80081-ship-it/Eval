@@ -5,28 +5,28 @@
     "metrics": {
         "faithfulness": {
             "baseline": 4.2,
-            "new": 5.0,
-            "difference": 0.7999999999999998,
-            "regression": false
+            "new": 3.5,
+            "difference": -0.7000000000000002,
+            "regression": true
         },
         "relevance": {
             "baseline": 4.4,
-            "new": 5.0,
-            "difference": 0.5999999999999996,
-            "regression": false
+            "new": 3.75,
+            "difference": -0.6500000000000004,
+            "regression": true
         },
         "correctness": {
             "baseline": 4.3,
-            "new": 4.75,
-            "difference": 0.4500000000000002,
+            "new": 4.25,
+            "difference": -0.04999999999999982,
             "regression": false
         },
         "overall": {
             "baseline": 4.3,
-            "new": 4.75,
-            "difference": 0.4500000000000002,
-            "regression": false
+            "new": 3.75,
+            "difference": -0.5499999999999998,
+            "regression": true
         }
     },
-    "overall_status": "PASS"
+    "overall_status": "REGRESSION"
 }
