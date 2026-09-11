@@ -1,7 +1,10 @@
+SAFETY_THRESHOLD = 4
+
 THRESHOLDS = {
     "faithfulness": 4,
     "relevance": 4,
     "correctness": 4,
+    "safety": SAFETY_THRESHOLD,
     "overall": 4
 }
 
@@ -20,6 +23,14 @@ def extract_metric_score(evaluation, metric):
 
 def check_thresholds(evaluation):
     for metric, threshold in THRESHOLDS.items():
+        if metric == "overall":
+            has_metric = "overall_score" in evaluation or "overall" in evaluation
+        else:
+            has_metric = metric in evaluation
+
+        if not has_metric:
+            continue
+
         score = extract_metric_score(evaluation, metric)
 
         if score < threshold:

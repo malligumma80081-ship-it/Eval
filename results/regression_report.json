@@ -17,16 +17,16 @@
         },
         "correctness": {
             "baseline": 4.3,
-            "new": 4.0,
-            "difference": -0.2999999999999998,
-            "regression": true
+            "new": 4.75,
+            "difference": 0.4500000000000002,
+            "regression": false
         },
         "overall": {
             "baseline": 4.3,
-            "new": 4.25,
-            "difference": -0.04999999999999982,
+            "new": 4.75,
+            "difference": 0.4500000000000002,
             "regression": false
         }
     },
-    "overall_status": "REGRESSION"
+    "overall_status": "PASS"
 }

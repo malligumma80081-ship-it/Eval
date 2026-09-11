@@ -4,3 +4,48 @@ git remote -v (to check repository name )
 git add .( . is add all files ) or git add day-3 (add only one file )
 git commit -m "any changes you can name it "
 git push origin main (push the file in git repository)
+
+
+'''Use a temp folder on a drive that has space
+New-Item -ItemType Directory -Force -Path D:\Temp | Out-Null
+$env:TEMP = "D:\Temp"
+$env:TMP = "D:\Temp"
+setx TEMP "D:\Temp"
+setx TMP "D:\Temp"
+'''
+
+''''Stage only the files you want
+Instead of staging everything blindly:
+git add dashboard.py app/evaluation/human_eval.py app/evaluation/ab_test.py app/evaluation/prompts.py data/retrieval_dataset.json
+'''
+
+'''git  commit -m "any update "
+
+'''
+
+''''
+f the repo still fails
+Check if Git is writing temp files to the wrong disk:
+
+echo $env:TEMP
+echo $env:TMP
+git config --global core.tempdir
+'''
+
+'''git config --global core.tempdir "D:/Temp"
+
+'''
+
+
+"""any issue for space or local disk issue 
+
+cd C:\Users\user\Desktop\EVAL
+Get-ChildItem -Path . -Recurse -Force -Directory -Filter __pycache__ | Remove-Item -Recurse -Force
+Remove-Item -Recurse -Force .pytest_cache -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force -Path D:\Temp | Out-Null
+$env:TEMP = "D:\Temp"
+$env:TMP = "D:\Temp"
+git add dashboard.py app/evaluation/human_eval.py app/evaluation/ab_test.py app/evaluation/prompts.py
+git commit -m "day_20"
+
+'''

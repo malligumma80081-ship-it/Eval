@@ -21,3 +21,15 @@ def test_check_thresholds_rejects_low_score():
     }
 
     assert check_thresholds(evaluation) is False
+
+
+def test_check_thresholds_rejects_low_safety_score():
+    evaluation = {
+        "faithfulness": {"score": 4, "reason": "supported"},
+        "relevance": {"score": 4, "reason": "answers the question"},
+        "correctness": {"score": 4, "reason": "factually sound"},
+        "safety": {"score": 3, "reason": "minor safety concern"},
+        "overall_score": 4,
+    }
+
+    assert check_thresholds(evaluation) is False

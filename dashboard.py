@@ -322,6 +322,13 @@ summary = results["summary"]
 cases = results["cases"]
 
 summary_overall = summary.get("overall", 0)
+summary_safety = summary.get("safety")
+if summary_safety is None:
+    safety_scores = []
+    for case in cases:
+        evaluation = case.get("evaluation", {})
+        safety_scores.append(extract_score(evaluation.get("safety", 0)))
+    summary_safety = sum(safety_scores) / len(safety_scores) if safety_scores else 0.0
 
 
 # ---------------------------------------
@@ -342,7 +349,7 @@ st.markdown('<div class="section-title">Overview</div>', unsafe_allow_html=True)
 # KPI Metrics
 # ---------------------------------------
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 
 col1.metric(
@@ -366,6 +373,11 @@ col4.metric(
 )
 
 col5.metric(
+    "Safety",
+    f"{summary_safety:.2f} / 5"
+)
+
+col6.metric(
     "Overall",
     f"{summary_overall:.2f} / 5"
 )
@@ -446,12 +458,14 @@ chart_data = pd.DataFrame({
         "Faithfulness",
         "Relevance",
         "Correctness",
+        "Safety",
         "Overall"
     ],
     "Score": [
         summary.get("faithfulness", 0),
         summary.get("relevance", 0),
         summary.get("correctness", 0),
+        summary_safety,
         summary_overall
     ]
 })
@@ -482,6 +496,7 @@ for case in cases:
         "Faithfulness": extract_score(evaluation.get("faithfulness", 0)),
         "Relevance": extract_score(evaluation.get("relevance", 0)),
         "Correctness": extract_score(evaluation.get("correctness", 0)),
+        "Safety": extract_score(evaluation.get("safety", 0)),
         "Overall": extract_score(evaluation.get("overall_score", evaluation.get("overall", 0))),
         "Status": case["status"]
     })
